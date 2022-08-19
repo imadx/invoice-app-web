@@ -8,6 +8,7 @@ export interface Invoice {
 }
 
 export interface InvoiceState {
+  lastUpdatedAt: Date;
   billedDate: Date;
   billedByName: string;
   billedByAddressLine1: string;
@@ -28,6 +29,7 @@ export const useInvoiceStore = create<InvoiceState>()(
   devtools(
     persist(
       (set) => ({
+        lastUpdatedAt: new Date(),
         invoices: [],
         billedDate: new Date(),
         billedByName: "",
@@ -37,27 +39,29 @@ export const useInvoiceStore = create<InvoiceState>()(
         billedToAddressLine1: "",
         billedToAddressLine2: "",
         setValue: (key: keyof InvoiceState, value: any) => {
-          set(() => ({ [key]: value }));
+          set(() => ({ [key]: value, lastUpdatedAt: new Date() }));
         },
         updateInvoice: (index: number, field: keyof Invoice, value: string) => {
           set((state) => {
             const invoices = [...state.invoices];
             invoices[index][field] = value;
-            return { invoices };
+            return { invoices, lastUpdatedAt: new Date() };
           });
         },
         addInvoice: (invoice: Invoice) => {
           set((state) => ({
             invoices: [...state.invoices, invoice],
+            lastUpdatedAt: new Date(),
           }));
         },
         deleteInvoice: (index: number) => {
           set((state) => ({
             invoices: state.invoices.filter((_, i) => i !== index),
+            lastUpdatedAt: new Date(),
           }));
         },
         deleteAllInvoices: () => {
-          set((state) => ({ invoices: [] }));
+          set((state) => ({ invoices: [], lastUpdatedAt: new Date() }));
         },
         resetState: () => {
           set((state) => ({
@@ -69,6 +73,7 @@ export const useInvoiceStore = create<InvoiceState>()(
             billedToName: "",
             billedToAddressLine1: "",
             billedToAddressLine2: "",
+            lastUpdatedAt: new Date(),
           }));
         },
       }),

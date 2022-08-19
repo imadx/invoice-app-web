@@ -86,7 +86,7 @@ export const Invoices = () => {
                 <td className={styles.amount}>
                   <span>
                     <Editable
-                      type="text"
+                      type="number"
                       invoiceKey={{ index, field: "amount" }}
                       render={(value) => getFormattedCurrency(value, currency)}
                     />

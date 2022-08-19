@@ -1,0 +1,124 @@
+.table {
+  margin-top: 2rem;
+  width: calc(100vw - 6rem);
+  border-spacing: 0;
+  line-height: 2;
+
+  th,
+  td {
+    text-align: left;
+
+    &:last-child {
+      text-align: right;
+    }
+  }
+
+  td {
+    position: relative;
+
+    span {
+      background-color: var(--color-white);
+      position: relative;
+      display: inline-block;
+      z-index: 1;
+      padding: 0 1rem;
+      margin: 0 -1rem;
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      width: 100%;
+      position: absolute;
+      border-bottom: dashed thin var(--color-black);
+      top: 50%;
+    }
+  }
+
+  tr {
+    span {
+      display: inline-flex;
+      .deleteItem {
+        display: none;
+      }
+    }
+
+    &:hover {
+      .deleteItem {
+        display: inline-block;
+        font-size: smaller;
+        padding: 0.5rem;
+        margin-left: 0.5rem;
+        position: absolute;
+        left: 100%;
+        width: max-content;
+      }
+    }
+
+    .deleteItem {
+      display: inline-block;
+    }
+  }
+
+  .rowTotal {
+    font-weight: bold;
+  }
+}
+
+.invoiceActions {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .table {
+    tr {
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+
+      th,
+      td {
+        text-align: left !important;
+      }
+
+      th {
+        display: none;
+      }
+
+      td {
+        &::after {
+          display: none;
+        }
+
+        &:before {
+          font-size: small;
+          display: block;
+        }
+      }
+    }
+
+    .description {
+      &::before {
+        content: "Description";
+      }
+    }
+    .client {
+      &::before {
+        content: "Client";
+      }
+    }
+    .amount {
+      &::before {
+        content: "Amount";
+      }
+    }
+  }
+}
+
+@media print {
+  .invoiceActions {
+    display: none;
+  }
+}

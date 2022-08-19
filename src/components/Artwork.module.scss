@@ -1,0 +1,21 @@
+.logo {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  pointer-events: none;
+  z-index: 0;
+
+  svg {
+    width: 30rem;
+    opacity: 0.3;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo {
+    svg {
+      max-width: 50vw;
+      opacity: 0.3;
+    }
+  }
+}

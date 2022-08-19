@@ -1,0 +1,20 @@
+.container {
+  margin-top: 2rem;
+}
+
+.signature {
+  font-family: "Sacramento", cursive;
+  color: rgb(0, 60, 255);
+  font-size: 2rem;
+  position: relative;
+  width: fit-content;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0.6rem;
+    left: 0;
+    width: 100%;
+    border: dashed thin var(--color-black);
+  }
+}

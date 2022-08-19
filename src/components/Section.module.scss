@@ -1,0 +1,17 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.heading {
+  text-transform: uppercase;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  color: var(--color-accent);
+}
+
+.content {
+  line-height: 1.4;
+  width: fit-content;
+}

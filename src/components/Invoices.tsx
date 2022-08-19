@@ -1,5 +1,6 @@
 import { MouseEventHandler } from "react";
 import { useInvoiceStore } from "../store";
+import { getFormattedCurrency } from "../utils";
 import { Editable } from "./Editable";
 import styles from "./Invoices.module.scss";
 
@@ -53,7 +54,7 @@ export const Invoices = () => {
           </tr>
         </thead>
         <tbody>
-          {invoices.map((invoice, index) => {
+          {invoices.map((_invoice, index) => {
             return (
               <tr key={index}>
                 <td className={styles.description}>
@@ -87,9 +88,7 @@ export const Invoices = () => {
                     <Editable
                       type="text"
                       invoiceKey={{ index, field: "amount" }}
-                      render={(value) =>
-                        `${currency} ${parseFloat(value).toFixed(2)}`
-                      }
+                      render={(value) => getFormattedCurrency(value, currency)}
                     />
                   </span>
                 </td>
@@ -102,9 +101,7 @@ export const Invoices = () => {
             </td>
             <td className={styles.client}></td>
             <td className={styles.amount}>
-              <span>
-                {currency} {sum.toFixed(2)}
-              </span>
+              <span>{getFormattedCurrency(sum, currency)}</span>
             </td>
           </tr>
         </tbody>
@@ -123,7 +120,9 @@ export const Invoices = () => {
           className="danger"
           onClick={handleOnClickResetInvoices}
           disabled={invoices.length <= 0}
-          title={invoices.length <= 0 ? "No invoice items available" : undefined}
+          title={
+            invoices.length <= 0 ? "No invoice items available" : undefined
+          }
         >
           Reset Invoices
         </button>

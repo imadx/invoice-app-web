@@ -48,13 +48,22 @@ export const Editable = ({ storeKey, invoiceKey, type, render }: Props) => {
 
   const getEditInput = () => {
     if (typeof value === "string") {
+      let placeholder = "Enter a value";
+      if (storeKey) {
+        placeholder = `Enter a value for ${storeKey}`;
+      }
+
+      if (invoiceKey) {
+        placeholder = `Enter a value for ${invoiceKey.field}`;
+      }
+
       return (
         <input
           className={styles.editInput}
           type={type}
           defaultValue={value}
           onChange={handleOnChange}
-          placeholder={`Enter value for ${storeKey}`}
+          placeholder={placeholder}
         />
       );
     }
